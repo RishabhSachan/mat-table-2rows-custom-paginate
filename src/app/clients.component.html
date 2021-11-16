@@ -1,0 +1,47 @@
+<div class="title">Customers</div>
+<mat-divider></mat-divider>
+
+<div fxLayout="column" fxLayoutGap="10px" class="m-3">
+  <mat-card class="mat-elevation-z8">
+    <mat-table [dataSource]="this.dataSource">
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let client; let i = index">
+          <mat-form-field
+            floatLabel="never"
+            [appearance]="editIndex != i ? 'none' : 'legacy'"
+          >
+            <input
+              matInput
+              placeholder="{{ client.name }}"
+              [(ngModel)]="client.name"
+              [readonly]="editIndex != i"
+            />
+          </mat-form-field>
+          <mat-form-field
+            floatLabel="never"
+            [appearance]="editIndex != i ? 'none' : 'legacy'"
+          >
+            <input
+              matInput
+              placeholder="{{ client.index }}"
+              [(ngModel)]="client.index"
+              [readonly]="editIndex != i"
+            />
+          </mat-form-field>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let col; columns: displayedColumns"></mat-row>
+    </mat-table>
+
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 20]"
+      [pageSize]="pageSize"
+      (page)="pgEvent($event)"
+      [length]="15"
+      showFirstLastButtons
+    ></mat-paginator>
+  </mat-card>
+</div>
